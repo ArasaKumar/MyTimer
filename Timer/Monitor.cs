@@ -3,6 +3,16 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
+#region References
+
+/*
+ * https://www.bleepingcomputer.com/tutorials/windows-program-automatic-startup-locations/
+ * https://stackoverflow.com/questions/995195/how-can-i-make-a-net-windows-forms-application-that-only-runs-in-the-system-tra
+ * https://stackoverflow.com/questions/97283/how-can-i-determine-the-name-of-the-currently-focused-process-in-c-sharp
+*/
+
+#endregion
+
 namespace Timer
 {
     public partial class Monitor : Form
@@ -13,7 +23,7 @@ namespace Timer
             {
                 InitializeComponent();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString(), this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
