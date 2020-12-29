@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.1321
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Timer", "Timer\Timer.csproj", "{639576D4-7430-4651-833F-96B820C02505}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyTimer", "Timer\MyTimer.csproj", "{639576D4-7430-4651-833F-96B820C02505}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
