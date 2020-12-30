@@ -1,12 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Runtime.InteropServices;
+using Timer;
 
 class FGHook : IDisposable
 {
     // Delegate and imports from pinvoke.net:
 
-    public static List<string> APPList = new List<string>();
+    private static DataStore _objDataStore = null;
 
     delegate void WinEventDelegate(IntPtr hWinEventHook, uint eventType, IntPtr hwnd, int idObject, int idChild, uint dwEventThread, uint dwmsEventTime);
 
@@ -35,6 +35,7 @@ class FGHook : IDisposable
 
     public FGHook()
     {
+        _objDataStore = DataStore.GetInstance();
         hhook = SetWinEventHook(EVENT_SYSTEM_FOREGROUND, EVENT_SYSTEM_FOREGROUND, IntPtr.Zero, procDelegate, 0, 0, WINEVENT_OUTOFCONTEXT);
     }
 
@@ -52,23 +53,21 @@ class FGHook : IDisposable
         if (hwnd == null)
             return;
 
-        uint pid;
-        GetWindowThreadProcessId(hwnd, out pid);
+        GetWindowThreadProcessId(hwnd, out uint pid);
 
         foreach (System.Diagnostics.Process p in System.Diagnostics.Process.GetProcesses())
         {
             if (p.Id == pid)
             {
-                APPList.Add(p.ProcessName);
+                _objDataStore.UpdateData(p.ProcessName);
                 return;
             }
         }
-        APPList.Add("Unknown");
+        _objDataStore.UpdateData("Unknown");
     }
 
     public void Dispose()
     {
         UnhookWinEvent(hhook);
     }
-
 }

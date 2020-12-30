@@ -16,6 +16,7 @@ namespace Timer
     public partial class Monitor : Form
     {
         private FGHook _objfgHook = null;
+        private DataStore _objDataStore = null;
         private string _strStatus = string.Empty;
 
         private string AppStatus
@@ -44,6 +45,9 @@ namespace Timer
                 InitializeComponent();
                 notifyIcon.ContextMenuStrip = cmMenu;
                 AppStatus = Status.Stopped;
+                _objfgHook = new FGHook();
+                _objDataStore = DataStore.GetInstance();
+                _objDataStore.PropertyChanged += _objDataStore_PropertyChanged;
             }
             catch (Exception ex)
             {
@@ -51,15 +55,14 @@ namespace Timer
             }
         }
 
+        private void _objDataStore_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            tbxLog.Text = string.Join(Environment.NewLine, _objDataStore.Data);
+        }
+
         public void RecordData()
         {
             _objfgHook = new FGHook();
-            while (true)
-            {
-                System.Threading.Thread.Sleep(new TimeSpan(0, 0, 1));
-                tbxLog.Text = string.Join(Environment.NewLine, FGHook.APPList);
-                Application.DoEvents();
-            }
         }
 
         private void btnStart_Click(object sender, EventArgs e)
