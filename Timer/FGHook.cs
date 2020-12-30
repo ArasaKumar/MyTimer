@@ -33,9 +33,9 @@ class FGHook : IDisposable
     // storing it in a class field is simplest way to do this.
     static WinEventDelegate procDelegate = new WinEventDelegate(WinEventProc);
 
-    public FGHook()
+    public FGHook(DataStore pobjDataStore)
     {
-        _objDataStore = DataStore.GetInstance();
+        _objDataStore = pobjDataStore;
         hhook = SetWinEventHook(EVENT_SYSTEM_FOREGROUND, EVENT_SYSTEM_FOREGROUND, IntPtr.Zero, procDelegate, 0, 0, WINEVENT_OUTOFCONTEXT);
     }
 
@@ -71,3 +71,4 @@ class FGHook : IDisposable
         UnhookWinEvent(hhook);
     }
 }
+

@@ -29,6 +29,7 @@ namespace Timer
             {
                 _strStatus = value;
                 lblMessage.Text = _strStatus;
+                SetAllowedActions(_strStatus);
             }
         }
 
@@ -44,10 +45,10 @@ namespace Timer
             {
                 InitializeComponent();
                 notifyIcon.ContextMenuStrip = cmMenu;
-                AppStatus = Status.Stopped;
-                _objfgHook = new FGHook();
                 _objDataStore = DataStore.GetInstance();
+                _objfgHook = new FGHook(_objDataStore);
                 _objDataStore.PropertyChanged += _objDataStore_PropertyChanged;
+                AppStatus = Status.Running;
             }
             catch (Exception ex)
             {
@@ -62,12 +63,22 @@ namespace Timer
 
         public void RecordData()
         {
-            _objfgHook = new FGHook();
+            _objfgHook = new FGHook(_objDataStore);
         }
 
         private void btnStart_Click(object sender, EventArgs e)
         {
             StartMonitoring();
+        }
+
+        private void SetAllowedActions(string pstrStatus)
+        {
+            bool bStatus = pstrStatus == Status.Running;
+
+            btnStart.Enabled = !bStatus;
+            startToolStripMenuItem.Enabled = !bStatus;
+            btnStop.Enabled = bStatus;
+            stopToolStripMenuItem.Enabled = bStatus;
         }
 
         private void StartMonitoring()
