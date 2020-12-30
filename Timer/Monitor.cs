@@ -3,11 +3,7 @@ using System.Windows.Forms;
 
 #region References
 
-/*
- * https://www.bleepingcomputer.com/tutorials/windows-program-automatic-startup-locations/
- * https://stackoverflow.com/questions/995195/how-can-i-make-a-net-windows-forms-application-that-only-runs-in-the-system-tra
- * https://stackoverflow.com/questions/97283/how-can-i-determine-the-name-of-the-currently-focused-process-in-c-sharp
-*/
+
 
 #endregion
 
@@ -15,9 +11,18 @@ namespace Timer
 {
     public partial class Monitor : Form
     {
+
+        #region Class Declarations
+
         private FGHook _objfgHook = null;
         private DataStore _objDataStore = null;
         private string _strStatus = string.Empty;
+
+        private class Status
+        {
+            public const string Running = "Running!";
+            public const string Stopped = "Stopped!";
+        }
 
         private string AppStatus
         {
@@ -33,11 +38,9 @@ namespace Timer
             }
         }
 
-        private class Status
-        {
-            public const string Running = "Running!";
-            public const string Stopped = "Stopped!";
-        }
+        #endregion
+
+        #region Constructor and Initialization
 
         public Monitor()
         {
@@ -56,19 +59,38 @@ namespace Timer
             }
         }
 
-        private void _objDataStore_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
-        {
-            tbxLog.Text = string.Join(Environment.NewLine, _objDataStore.Data);
-        }
+        #endregion
 
-        public void RecordData()
-        {
-            _objfgHook = new FGHook(_objDataStore);
-        }
+        #region UI Screen Event Handlers
 
         private void btnStart_Click(object sender, EventArgs e)
         {
             StartMonitoring();
+        }
+
+        private void btnStop_Click(object sender, EventArgs e)
+        {
+            StopMonitoring();
+        }
+
+        private void btnMinimize_Click(object sender, EventArgs e)
+        {
+            Hide();
+            notifyIcon.Visible = true;
+        }
+
+        private void btnQuit_Click(object sender, EventArgs e)
+        {
+            QuitApp();
+        }
+
+        #endregion
+
+        #region Update UI Data
+
+        private void _objDataStore_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            tbxLog.Text = string.Join(Environment.NewLine, _objDataStore.Data);
         }
 
         private void SetAllowedActions(string pstrStatus)
@@ -81,6 +103,10 @@ namespace Timer
             stopToolStripMenuItem.Enabled = bStatus;
         }
 
+        #endregion
+
+        #region Helpers
+
         private void StartMonitoring()
         {
             try
@@ -88,18 +114,13 @@ namespace Timer
                 if (AppStatus != Status.Running)
                 {
                     AppStatus = Status.Running;
-                    RecordData();
+                    _objfgHook = new FGHook(_objDataStore);
                 }
             }
             catch (Exception ex)
             {
                 HandleException(ex);
             }
-        }
-
-        private void btnStop_Click(object sender, EventArgs e)
-        {
-            StopMonitoring();
         }
 
         private void StopMonitoring()
@@ -114,40 +135,6 @@ namespace Timer
             }
         }
 
-        private void HandleException(Exception ex)
-        {
-            if (_objfgHook != null)
-            {
-                _objfgHook.Dispose();
-            }
-            MessageBox.Show(ex.ToString(), this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
-        }
-
-        private void btnMinimize_Click(object sender, EventArgs e)
-        {
-            Hide();
-            notifyIcon.Visible = true;
-        }
-
-        private void btnQuit_Click(object sender, EventArgs e)
-        {
-            QuitApp();
-        }
-
-        private void maximizeToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                Show();
-                this.WindowState = FormWindowState.Normal;
-                notifyIcon.Visible = false;
-            }
-            catch (Exception ex)
-            {
-                HandleException(ex);
-            }
-        }
-
         private void QuitApp()
         {
             try
@@ -157,6 +144,33 @@ namespace Timer
                     _objfgHook.Dispose();
                 }
                 this.Close();
+            }
+            catch (Exception ex)
+            {
+                HandleException(ex);
+            }
+        }
+
+        private void HandleException(Exception ex)
+        {
+            if (_objfgHook != null)
+            {
+                _objfgHook.Dispose();
+            }
+            MessageBox.Show(ex.ToString(), this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+        #endregion
+
+        #region System tray context menu event handlers
+
+        private void maximizeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Show();
+                this.WindowState = FormWindowState.Normal;
+                notifyIcon.Visible = false;
             }
             catch (Exception ex)
             {
@@ -183,6 +197,9 @@ namespace Timer
         {
             notifyIcon.ShowBalloonTip(10, "Status", AppStatus, ToolTipIcon.Info);
         }
+
+        #endregion
+        
     }
 }
 
