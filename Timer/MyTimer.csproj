@@ -66,6 +66,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FGHook.cs" />
     <Compile Include="Monitor.cs">
       <SubType>Form</SubType>
     </Compile>
