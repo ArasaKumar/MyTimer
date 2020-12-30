@@ -19,7 +19,9 @@ namespace Timer
         private FGHook _objfgHook = null;
         private DataStore _objDataStore = null;
         private string _strStatus = string.Empty;
-        private readonly MaterialSkinManager materialSkinManager;
+        private readonly MaterialSkinManager _materialSkinManager;
+        private readonly ColorScheme _csLight;
+        private readonly ColorScheme _csDark;
 
         private class Status
         {
@@ -51,10 +53,11 @@ namespace Timer
             {
                 InitializeComponent();
 
-                materialSkinManager = MaterialSkinManager.Instance;
-                materialSkinManager.AddFormToManage(this);
-                materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
-                materialSkinManager.ColorScheme = new ColorScheme(Primary.BlueGrey800, Primary.BlueGrey900, Primary.BlueGrey500, Accent.LightBlue200, TextShade.WHITE);
+                _materialSkinManager = MaterialSkinManager.Instance;
+                _materialSkinManager.AddFormToManage(this);
+                _materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
+                _csLight = _materialSkinManager.ColorScheme;
+                _csDark = new ColorScheme(Primary.BlueGrey800, Primary.BlueGrey900, Primary.BlueGrey500, Accent.LightBlue200, TextShade.WHITE);
 
                 notifyIcon.ContextMenuStrip = cmMenu;
                 _objDataStore = DataStore.GetInstance();
@@ -70,7 +73,8 @@ namespace Timer
 
         private void bswtTheme_CheckedChanged(object sender, EventArgs e)
         {
-            materialSkinManager.Theme = bswtTheme.Checked ? MaterialSkinManager.Themes.DARK : MaterialSkinManager.Themes.LIGHT;
+            _materialSkinManager.Theme = bswtTheme.Checked ? MaterialSkinManager.Themes.DARK : MaterialSkinManager.Themes.LIGHT;
+            _materialSkinManager.ColorScheme = bswtTheme.Checked ? _csDark : _csLight;
         }
 
         #endregion
@@ -87,15 +91,21 @@ namespace Timer
             StopMonitoring();
         }
 
-        private void btnMinimize_Click(object sender, EventArgs e)
+        private void Monitor_FormClosing(object sender, FormClosingEventArgs e)
         {
-            Hide();
-            notifyIcon.Visible = true;
+            if (_objfgHook != null)
+            {
+                _objfgHook.Dispose();
+            }
         }
 
-        private void btnQuit_Click(object sender, EventArgs e)
+        private void Monitor_Resize(object sender, EventArgs e)
         {
-            QuitApp();
+            if(this.WindowState==FormWindowState.Minimized)
+            {
+                Hide();
+                notifyIcon.Visible = true;
+            }
         }
 
         #endregion
@@ -213,7 +223,6 @@ namespace Timer
         }
 
         #endregion
-
     }
 }
 

@@ -39,16 +39,14 @@
             this.showStatusToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mtlpMain = new System.Windows.Forms.TableLayoutPanel();
             this.mtlpHeader = new System.Windows.Forms.TableLayoutPanel();
+            this.mbtnStop = new MaterialSkin.Controls.MaterialButton();
             this.mlblActionLabel = new MaterialSkin.Controls.MaterialLabel();
             this.mbtnStart = new MaterialSkin.Controls.MaterialButton();
-            this.mbtnStop = new MaterialSkin.Controls.MaterialButton();
-            this.mbtnMinimize = new MaterialSkin.Controls.MaterialButton();
-            this.mbtnQuit = new MaterialSkin.Controls.MaterialButton();
-            this.bswtTheme = new MaterialSkin.Controls.MaterialSwitch();
-            this.mlblStatusLabel = new MaterialSkin.Controls.MaterialLabel();
             this.mtlpFooter = new System.Windows.Forms.TableLayoutPanel();
             this.mlblMessage = new MaterialSkin.Controls.MaterialLabel();
+            this.mlblStatusLabel = new MaterialSkin.Controls.MaterialLabel();
             this.mmtbxData = new MaterialSkin.Controls.MaterialMultiLineTextBox();
+            this.bswtTheme = new MaterialSkin.Controls.MaterialSwitch();
             this.cmMenu.SuspendLayout();
             this.mtlpMain.SuspendLayout();
             this.mtlpHeader.SuspendLayout();
@@ -126,19 +124,16 @@
             // 
             // mtlpHeader
             // 
-            this.mtlpHeader.ColumnCount = 6;
+            this.mtlpHeader.ColumnCount = 5;
             this.mtlpHeader.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.mtlpHeader.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.mtlpHeader.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.mtlpHeader.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.mtlpHeader.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.mtlpHeader.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.mtlpHeader.Controls.Add(this.mbtnQuit, 4, 0);
-            this.mtlpHeader.Controls.Add(this.mbtnMinimize, 3, 0);
+            this.mtlpHeader.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.mtlpHeader.Controls.Add(this.mbtnStop, 2, 0);
             this.mtlpHeader.Controls.Add(this.mlblActionLabel, 0, 0);
             this.mtlpHeader.Controls.Add(this.mbtnStart, 1, 0);
-            this.mtlpHeader.Controls.Add(this.bswtTheme, 5, 0);
+            this.mtlpHeader.Controls.Add(this.bswtTheme, 3, 0);
             this.mtlpHeader.Dock = System.Windows.Forms.DockStyle.Fill;
             this.mtlpHeader.Location = new System.Drawing.Point(3, 3);
             this.mtlpHeader.Name = "mtlpHeader";
@@ -147,49 +142,16 @@
             this.mtlpHeader.Size = new System.Drawing.Size(979, 74);
             this.mtlpHeader.TabIndex = 0;
             // 
-            // mlblActionLabel
-            // 
-            this.mlblActionLabel.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.mlblActionLabel.AutoSize = true;
-            this.mlblActionLabel.Depth = 0;
-            this.mlblActionLabel.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.mlblActionLabel.Location = new System.Drawing.Point(20, 27);
-            this.mlblActionLabel.Margin = new System.Windows.Forms.Padding(20, 5, 5, 5);
-            this.mlblActionLabel.MouseState = MaterialSkin.MouseState.HOVER;
-            this.mlblActionLabel.Name = "mlblActionLabel";
-            this.mlblActionLabel.Size = new System.Drawing.Size(58, 19);
-            this.mlblActionLabel.TabIndex = 0;
-            this.mlblActionLabel.Text = "Actions:";
-            // 
-            // mbtnStart
-            // 
-            this.mbtnStart.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.mbtnStart.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.mbtnStart.Depth = 0;
-            this.mbtnStart.DrawShadows = true;
-            this.mbtnStart.HighEmphasis = true;
-            this.mbtnStart.Icon = null;
-            this.mbtnStart.Location = new System.Drawing.Point(103, 19);
-            this.mbtnStart.Margin = new System.Windows.Forms.Padding(20, 5, 5, 5);
-            this.mbtnStart.MouseState = MaterialSkin.MouseState.HOVER;
-            this.mbtnStart.Name = "mbtnStart";
-            this.mbtnStart.Size = new System.Drawing.Size(67, 36);
-            this.mbtnStart.TabIndex = 1;
-            this.mbtnStart.Text = "Start";
-            this.mbtnStart.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-            this.mbtnStart.UseAccentColor = false;
-            this.mbtnStart.UseVisualStyleBackColor = true;
-            this.mbtnStart.Click += new System.EventHandler(this.btnStart_Click);
-            // 
             // mbtnStop
             // 
             this.mbtnStop.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.mbtnStop.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.mbtnStop.Depth = 0;
             this.mbtnStop.DrawShadows = true;
+            this.mbtnStop.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.mbtnStop.HighEmphasis = true;
             this.mbtnStop.Icon = null;
-            this.mbtnStop.Location = new System.Drawing.Point(195, 19);
+            this.mbtnStop.Location = new System.Drawing.Point(210, 19);
             this.mbtnStop.Margin = new System.Windows.Forms.Padding(20, 5, 5, 5);
             this.mbtnStop.MouseState = MaterialSkin.MouseState.HOVER;
             this.mbtnStop.Name = "mbtnStop";
@@ -201,76 +163,41 @@
             this.mbtnStop.UseVisualStyleBackColor = true;
             this.mbtnStop.Click += new System.EventHandler(this.btnStop_Click);
             // 
-            // mbtnMinimize
+            // mlblActionLabel
             // 
-            this.mbtnMinimize.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.mbtnMinimize.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.mbtnMinimize.Depth = 0;
-            this.mbtnMinimize.DrawShadows = true;
-            this.mbtnMinimize.HighEmphasis = true;
-            this.mbtnMinimize.Icon = null;
-            this.mbtnMinimize.Location = new System.Drawing.Point(278, 19);
-            this.mbtnMinimize.Margin = new System.Windows.Forms.Padding(20, 5, 5, 5);
-            this.mbtnMinimize.MouseState = MaterialSkin.MouseState.HOVER;
-            this.mbtnMinimize.Name = "mbtnMinimize";
-            this.mbtnMinimize.Size = new System.Drawing.Size(88, 36);
-            this.mbtnMinimize.TabIndex = 3;
-            this.mbtnMinimize.Text = "Minimize";
-            this.mbtnMinimize.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-            this.mbtnMinimize.UseAccentColor = false;
-            this.mbtnMinimize.UseVisualStyleBackColor = true;
-            this.mbtnMinimize.Click += new System.EventHandler(this.btnMinimize_Click);
+            this.mlblActionLabel.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.mlblActionLabel.AutoSize = true;
+            this.mlblActionLabel.Depth = 0;
+            this.mlblActionLabel.Font = new System.Drawing.Font("Roboto Medium", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+            this.mlblActionLabel.FontType = MaterialSkin.MaterialSkinManager.fontType.H6;
+            this.mlblActionLabel.Location = new System.Drawing.Point(20, 25);
+            this.mlblActionLabel.Margin = new System.Windows.Forms.Padding(20, 5, 5, 5);
+            this.mlblActionLabel.MouseState = MaterialSkin.MouseState.HOVER;
+            this.mlblActionLabel.Name = "mlblActionLabel";
+            this.mlblActionLabel.Size = new System.Drawing.Size(73, 24);
+            this.mlblActionLabel.TabIndex = 0;
+            this.mlblActionLabel.Text = "Actions:";
             // 
-            // mbtnQuit
+            // mbtnStart
             // 
-            this.mbtnQuit.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.mbtnQuit.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.mbtnQuit.Depth = 0;
-            this.mbtnQuit.DrawShadows = true;
-            this.mbtnQuit.HighEmphasis = true;
-            this.mbtnQuit.Icon = null;
-            this.mbtnQuit.Location = new System.Drawing.Point(391, 19);
-            this.mbtnQuit.Margin = new System.Windows.Forms.Padding(20, 5, 5, 5);
-            this.mbtnQuit.MouseState = MaterialSkin.MouseState.HOVER;
-            this.mbtnQuit.Name = "mbtnQuit";
-            this.mbtnQuit.Size = new System.Drawing.Size(54, 36);
-            this.mbtnQuit.TabIndex = 4;
-            this.mbtnQuit.Text = "Quit";
-            this.mbtnQuit.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-            this.mbtnQuit.UseAccentColor = false;
-            this.mbtnQuit.UseVisualStyleBackColor = true;
-            this.mbtnQuit.Click += new System.EventHandler(this.btnQuit_Click);
-            // 
-            // bswtTheme
-            // 
-            this.bswtTheme.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.bswtTheme.AutoSize = true;
-            this.bswtTheme.Depth = 0;
-            this.bswtTheme.Location = new System.Drawing.Point(470, 18);
-            this.bswtTheme.Margin = new System.Windows.Forms.Padding(20, 5, 5, 5);
-            this.bswtTheme.MouseLocation = new System.Drawing.Point(-1, -1);
-            this.bswtTheme.MouseState = MaterialSkin.MouseState.HOVER;
-            this.bswtTheme.Name = "bswtTheme";
-            this.bswtTheme.Ripple = true;
-            this.bswtTheme.Size = new System.Drawing.Size(144, 37);
-            this.bswtTheme.TabIndex = 5;
-            this.bswtTheme.Text = "Dark Theme";
-            this.bswtTheme.UseVisualStyleBackColor = true;
-            this.bswtTheme.CheckedChanged += new System.EventHandler(this.bswtTheme_CheckedChanged);
-            // 
-            // mlblStatusLabel
-            // 
-            this.mlblStatusLabel.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.mlblStatusLabel.AutoSize = true;
-            this.mlblStatusLabel.Depth = 0;
-            this.mlblStatusLabel.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.mlblStatusLabel.Location = new System.Drawing.Point(20, 27);
-            this.mlblStatusLabel.Margin = new System.Windows.Forms.Padding(20, 5, 5, 5);
-            this.mlblStatusLabel.MouseState = MaterialSkin.MouseState.HOVER;
-            this.mlblStatusLabel.Name = "mlblStatusLabel";
-            this.mlblStatusLabel.Size = new System.Drawing.Size(51, 19);
-            this.mlblStatusLabel.TabIndex = 1;
-            this.mlblStatusLabel.Text = "Status:";
+            this.mbtnStart.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.mbtnStart.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.mbtnStart.Depth = 0;
+            this.mbtnStart.DrawShadows = true;
+            this.mbtnStart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.mbtnStart.HighEmphasis = true;
+            this.mbtnStart.Icon = null;
+            this.mbtnStart.Location = new System.Drawing.Point(118, 19);
+            this.mbtnStart.Margin = new System.Windows.Forms.Padding(20, 5, 5, 5);
+            this.mbtnStart.MouseState = MaterialSkin.MouseState.HOVER;
+            this.mbtnStart.Name = "mbtnStart";
+            this.mbtnStart.Size = new System.Drawing.Size(67, 36);
+            this.mbtnStart.TabIndex = 1;
+            this.mbtnStart.Text = "Start";
+            this.mbtnStart.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.mbtnStart.UseAccentColor = false;
+            this.mbtnStart.UseVisualStyleBackColor = true;
+            this.mbtnStart.Click += new System.EventHandler(this.btnStart_Click);
             // 
             // mtlpFooter
             // 
@@ -290,17 +217,34 @@
             // 
             // mlblMessage
             // 
-            this.mlblMessage.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.mlblMessage.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.mlblMessage.AutoSize = true;
             this.mlblMessage.Depth = 0;
             this.mlblMessage.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.mlblMessage.Location = new System.Drawing.Point(96, 27);
+            this.mlblMessage.Location = new System.Drawing.Point(487, 27);
             this.mlblMessage.Margin = new System.Windows.Forms.Padding(20, 5, 5, 5);
             this.mlblMessage.MouseState = MaterialSkin.MouseState.HOVER;
             this.mlblMessage.Name = "mlblMessage";
             this.mlblMessage.Size = new System.Drawing.Size(108, 19);
             this.mlblMessage.TabIndex = 2;
             this.mlblMessage.Text = "Not yet started!";
+            this.mlblMessage.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // mlblStatusLabel
+            // 
+            this.mlblStatusLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.mlblStatusLabel.AutoSize = true;
+            this.mlblStatusLabel.Depth = 0;
+            this.mlblStatusLabel.Font = new System.Drawing.Font("Roboto Medium", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+            this.mlblStatusLabel.FontType = MaterialSkin.MaterialSkinManager.fontType.H6;
+            this.mlblStatusLabel.Location = new System.Drawing.Point(20, 25);
+            this.mlblStatusLabel.Margin = new System.Windows.Forms.Padding(20, 5, 5, 5);
+            this.mlblStatusLabel.MouseState = MaterialSkin.MouseState.HOVER;
+            this.mlblStatusLabel.Name = "mlblStatusLabel";
+            this.mlblStatusLabel.Size = new System.Drawing.Size(64, 24);
+            this.mlblStatusLabel.TabIndex = 1;
+            this.mlblStatusLabel.Text = "Status:";
+            this.mlblStatusLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // mmtbxData
             // 
@@ -308,7 +252,7 @@
             this.mmtbxData.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.mmtbxData.Depth = 0;
             this.mmtbxData.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.mmtbxData.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.mmtbxData.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.mmtbxData.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.mmtbxData.Hint = "";
             this.mmtbxData.Location = new System.Drawing.Point(3, 83);
@@ -319,6 +263,24 @@
             this.mmtbxData.TabIndex = 3;
             this.mmtbxData.Text = "";
             // 
+            // bswtTheme
+            // 
+            this.bswtTheme.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.bswtTheme.AutoSize = true;
+            this.bswtTheme.Depth = 0;
+            this.bswtTheme.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.bswtTheme.Location = new System.Drawing.Point(293, 18);
+            this.bswtTheme.Margin = new System.Windows.Forms.Padding(20, 5, 5, 5);
+            this.bswtTheme.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.bswtTheme.MouseState = MaterialSkin.MouseState.HOVER;
+            this.bswtTheme.Name = "bswtTheme";
+            this.bswtTheme.Ripple = true;
+            this.bswtTheme.Size = new System.Drawing.Size(144, 37);
+            this.bswtTheme.TabIndex = 5;
+            this.bswtTheme.Text = "Dark Theme";
+            this.bswtTheme.UseVisualStyleBackColor = true;
+            this.bswtTheme.CheckedChanged += new System.EventHandler(this.bswtTheme_CheckedChanged);
+            // 
             // Monitor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -327,6 +289,8 @@
             this.Controls.Add(this.mtlpMain);
             this.Name = "Monitor";
             this.Text = "App Time Monitor";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Monitor_FormClosing);
+            this.Resize += new System.EventHandler(this.Monitor_Resize);
             this.cmMenu.ResumeLayout(false);
             this.mtlpMain.ResumeLayout(false);
             this.mtlpHeader.ResumeLayout(false);
@@ -348,15 +312,13 @@
         private System.Windows.Forms.TableLayoutPanel mtlpMain;
         private System.Windows.Forms.TableLayoutPanel mtlpHeader;
         private MaterialSkin.Controls.MaterialLabel mlblActionLabel;
-        private MaterialSkin.Controls.MaterialButton mbtnQuit;
-        private MaterialSkin.Controls.MaterialButton mbtnMinimize;
         private MaterialSkin.Controls.MaterialButton mbtnStop;
         private MaterialSkin.Controls.MaterialButton mbtnStart;
-        private MaterialSkin.Controls.MaterialSwitch bswtTheme;
         private MaterialSkin.Controls.MaterialLabel mlblStatusLabel;
         private System.Windows.Forms.TableLayoutPanel mtlpFooter;
         private MaterialSkin.Controls.MaterialLabel mlblMessage;
         private MaterialSkin.Controls.MaterialMultiLineTextBox mmtbxData;
+        private MaterialSkin.Controls.MaterialSwitch bswtTheme;
     }
 }
 
