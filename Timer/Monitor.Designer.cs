@@ -42,11 +42,11 @@
             this.mbtnStop = new MaterialSkin.Controls.MaterialButton();
             this.mlblActionLabel = new MaterialSkin.Controls.MaterialLabel();
             this.mbtnStart = new MaterialSkin.Controls.MaterialButton();
+            this.bswtTheme = new MaterialSkin.Controls.MaterialSwitch();
             this.mtlpFooter = new System.Windows.Forms.TableLayoutPanel();
             this.mlblMessage = new MaterialSkin.Controls.MaterialLabel();
             this.mlblStatusLabel = new MaterialSkin.Controls.MaterialLabel();
             this.mmtbxData = new MaterialSkin.Controls.MaterialMultiLineTextBox();
-            this.bswtTheme = new MaterialSkin.Controls.MaterialSwitch();
             this.cmMenu.SuspendLayout();
             this.mtlpMain.SuspendLayout();
             this.mtlpHeader.SuspendLayout();
@@ -110,16 +110,17 @@
             this.mtlpMain.ColumnCount = 1;
             this.mtlpMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.mtlpMain.Controls.Add(this.mtlpHeader, 0, 0);
-            this.mtlpMain.Controls.Add(this.mtlpFooter, 0, 2);
+            this.mtlpMain.Controls.Add(this.mtlpFooter, 0, 3);
             this.mtlpMain.Controls.Add(this.mmtbxData, 0, 1);
             this.mtlpMain.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.mtlpMain.Location = new System.Drawing.Point(0, 64);
+            this.mtlpMain.Location = new System.Drawing.Point(1, 59);
             this.mtlpMain.Name = "mtlpMain";
-            this.mtlpMain.RowCount = 3;
-            this.mtlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 80F));
+            this.mtlpMain.RowCount = 4;
+            this.mtlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 45F));
             this.mtlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.mtlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 80F));
-            this.mtlpMain.Size = new System.Drawing.Size(985, 551);
+            this.mtlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.mtlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 45F));
+            this.mtlpMain.Size = new System.Drawing.Size(860, 517);
             this.mtlpMain.TabIndex = 5;
             // 
             // mtlpHeader
@@ -128,8 +129,8 @@
             this.mtlpHeader.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.mtlpHeader.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.mtlpHeader.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.mtlpHeader.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.mtlpHeader.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.mtlpHeader.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 18F));
             this.mtlpHeader.Controls.Add(this.mbtnStop, 2, 0);
             this.mtlpHeader.Controls.Add(this.mlblActionLabel, 0, 0);
             this.mtlpHeader.Controls.Add(this.mbtnStart, 1, 0);
@@ -139,7 +140,7 @@
             this.mtlpHeader.Name = "mtlpHeader";
             this.mtlpHeader.RowCount = 1;
             this.mtlpHeader.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.mtlpHeader.Size = new System.Drawing.Size(979, 74);
+            this.mtlpHeader.Size = new System.Drawing.Size(857, 39);
             this.mtlpHeader.TabIndex = 0;
             // 
             // mbtnStop
@@ -151,11 +152,11 @@
             this.mbtnStop.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.mbtnStop.HighEmphasis = true;
             this.mbtnStop.Icon = null;
-            this.mbtnStop.Location = new System.Drawing.Point(210, 19);
-            this.mbtnStop.Margin = new System.Windows.Forms.Padding(20, 5, 5, 5);
+            this.mbtnStop.Location = new System.Drawing.Point(187, 5);
+            this.mbtnStop.Margin = new System.Windows.Forms.Padding(18, 5, 4, 5);
             this.mbtnStop.MouseState = MaterialSkin.MouseState.HOVER;
             this.mbtnStop.Name = "mbtnStop";
-            this.mbtnStop.Size = new System.Drawing.Size(58, 36);
+            this.mbtnStop.Size = new System.Drawing.Size(58, 29);
             this.mbtnStop.TabIndex = 2;
             this.mbtnStop.Text = "Stop";
             this.mbtnStop.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
@@ -168,13 +169,12 @@
             this.mlblActionLabel.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.mlblActionLabel.AutoSize = true;
             this.mlblActionLabel.Depth = 0;
-            this.mlblActionLabel.Font = new System.Drawing.Font("Roboto Medium", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
-            this.mlblActionLabel.FontType = MaterialSkin.MaterialSkinManager.fontType.H6;
-            this.mlblActionLabel.Location = new System.Drawing.Point(20, 25);
-            this.mlblActionLabel.Margin = new System.Windows.Forms.Padding(20, 5, 5, 5);
+            this.mlblActionLabel.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.mlblActionLabel.Location = new System.Drawing.Point(18, 10);
+            this.mlblActionLabel.Margin = new System.Windows.Forms.Padding(18, 5, 4, 5);
             this.mlblActionLabel.MouseState = MaterialSkin.MouseState.HOVER;
             this.mlblActionLabel.Name = "mlblActionLabel";
-            this.mlblActionLabel.Size = new System.Drawing.Size(73, 24);
+            this.mlblActionLabel.Size = new System.Drawing.Size(58, 19);
             this.mlblActionLabel.TabIndex = 0;
             this.mlblActionLabel.Text = "Actions:";
             // 
@@ -187,11 +187,11 @@
             this.mbtnStart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.mbtnStart.HighEmphasis = true;
             this.mbtnStart.Icon = null;
-            this.mbtnStart.Location = new System.Drawing.Point(118, 19);
-            this.mbtnStart.Margin = new System.Windows.Forms.Padding(20, 5, 5, 5);
+            this.mbtnStart.Location = new System.Drawing.Point(98, 5);
+            this.mbtnStart.Margin = new System.Windows.Forms.Padding(18, 5, 4, 5);
             this.mbtnStart.MouseState = MaterialSkin.MouseState.HOVER;
             this.mbtnStart.Name = "mbtnStart";
-            this.mbtnStart.Size = new System.Drawing.Size(67, 36);
+            this.mbtnStart.Size = new System.Drawing.Size(67, 29);
             this.mbtnStart.TabIndex = 1;
             this.mbtnStart.Text = "Start";
             this.mbtnStart.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
@@ -199,20 +199,38 @@
             this.mbtnStart.UseVisualStyleBackColor = true;
             this.mbtnStart.Click += new System.EventHandler(this.btnStart_Click);
             // 
+            // bswtTheme
+            // 
+            this.bswtTheme.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.bswtTheme.AutoSize = true;
+            this.bswtTheme.Depth = 0;
+            this.bswtTheme.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.bswtTheme.Location = new System.Drawing.Point(695, 1);
+            this.bswtTheme.Margin = new System.Windows.Forms.Padding(0);
+            this.bswtTheme.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.bswtTheme.MouseState = MaterialSkin.MouseState.HOVER;
+            this.bswtTheme.Name = "bswtTheme";
+            this.bswtTheme.Ripple = true;
+            this.bswtTheme.Size = new System.Drawing.Size(144, 37);
+            this.bswtTheme.TabIndex = 5;
+            this.bswtTheme.Text = "Dark Theme";
+            this.bswtTheme.UseVisualStyleBackColor = true;
+            this.bswtTheme.CheckedChanged += new System.EventHandler(this.bswtTheme_CheckedChanged);
+            // 
             // mtlpFooter
             // 
             this.mtlpFooter.ColumnCount = 2;
             this.mtlpFooter.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.mtlpFooter.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.mtlpFooter.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.mtlpFooter.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 18F));
             this.mtlpFooter.Controls.Add(this.mlblMessage, 1, 0);
             this.mtlpFooter.Controls.Add(this.mlblStatusLabel, 0, 0);
             this.mtlpFooter.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.mtlpFooter.Location = new System.Drawing.Point(3, 474);
+            this.mtlpFooter.Location = new System.Drawing.Point(3, 475);
             this.mtlpFooter.Name = "mtlpFooter";
             this.mtlpFooter.RowCount = 1;
             this.mtlpFooter.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.mtlpFooter.Size = new System.Drawing.Size(979, 74);
+            this.mtlpFooter.Size = new System.Drawing.Size(857, 39);
             this.mtlpFooter.TabIndex = 2;
             // 
             // mlblMessage
@@ -221,8 +239,8 @@
             this.mlblMessage.AutoSize = true;
             this.mlblMessage.Depth = 0;
             this.mlblMessage.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.mlblMessage.Location = new System.Drawing.Point(487, 27);
-            this.mlblMessage.Margin = new System.Windows.Forms.Padding(20, 5, 5, 5);
+            this.mlblMessage.Location = new System.Drawing.Point(418, 10);
+            this.mlblMessage.Margin = new System.Windows.Forms.Padding(18, 5, 4, 5);
             this.mlblMessage.MouseState = MaterialSkin.MouseState.HOVER;
             this.mlblMessage.Name = "mlblMessage";
             this.mlblMessage.Size = new System.Drawing.Size(108, 19);
@@ -235,13 +253,12 @@
             this.mlblStatusLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.mlblStatusLabel.AutoSize = true;
             this.mlblStatusLabel.Depth = 0;
-            this.mlblStatusLabel.Font = new System.Drawing.Font("Roboto Medium", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
-            this.mlblStatusLabel.FontType = MaterialSkin.MaterialSkinManager.fontType.H6;
-            this.mlblStatusLabel.Location = new System.Drawing.Point(20, 25);
-            this.mlblStatusLabel.Margin = new System.Windows.Forms.Padding(20, 5, 5, 5);
+            this.mlblStatusLabel.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.mlblStatusLabel.Location = new System.Drawing.Point(18, 10);
+            this.mlblStatusLabel.Margin = new System.Windows.Forms.Padding(18, 5, 4, 5);
             this.mlblStatusLabel.MouseState = MaterialSkin.MouseState.HOVER;
             this.mlblStatusLabel.Name = "mlblStatusLabel";
-            this.mlblStatusLabel.Size = new System.Drawing.Size(64, 24);
+            this.mlblStatusLabel.Size = new System.Drawing.Size(51, 19);
             this.mlblStatusLabel.TabIndex = 1;
             this.mlblStatusLabel.Text = "Status:";
             this.mlblStatusLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -252,42 +269,31 @@
             this.mmtbxData.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.mmtbxData.Depth = 0;
             this.mmtbxData.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.mmtbxData.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.mmtbxData.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
             this.mmtbxData.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.mmtbxData.Hint = "";
-            this.mmtbxData.Location = new System.Drawing.Point(3, 83);
+            this.mmtbxData.Location = new System.Drawing.Point(3, 48);
             this.mmtbxData.MouseState = MaterialSkin.MouseState.HOVER;
             this.mmtbxData.Name = "mmtbxData";
             this.mmtbxData.ReadOnly = true;
-            this.mmtbxData.Size = new System.Drawing.Size(979, 385);
+            this.mmtbxData.Size = new System.Drawing.Size(857, 421);
             this.mmtbxData.TabIndex = 3;
             this.mmtbxData.Text = "";
             // 
-            // bswtTheme
-            // 
-            this.bswtTheme.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.bswtTheme.AutoSize = true;
-            this.bswtTheme.Depth = 0;
-            this.bswtTheme.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.bswtTheme.Location = new System.Drawing.Point(293, 18);
-            this.bswtTheme.Margin = new System.Windows.Forms.Padding(20, 5, 5, 5);
-            this.bswtTheme.MouseLocation = new System.Drawing.Point(-1, -1);
-            this.bswtTheme.MouseState = MaterialSkin.MouseState.HOVER;
-            this.bswtTheme.Name = "bswtTheme";
-            this.bswtTheme.Ripple = true;
-            this.bswtTheme.Size = new System.Drawing.Size(144, 37);
-            this.bswtTheme.TabIndex = 5;
-            this.bswtTheme.Text = "Dark Theme";
-            this.bswtTheme.UseVisualStyleBackColor = true;
-            this.bswtTheme.CheckedChanged += new System.EventHandler(this.bswtTheme_CheckedChanged);
-            // 
             // Monitor
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(985, 615);
+            this.AutoScroll = true;
+            this.AutoSize = true;
+            this.ClientSize = new System.Drawing.Size(862, 577);
             this.Controls.Add(this.mtlpMain);
+            this.Font = new System.Drawing.Font("Consolas", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.MaximizeBox = false;
             this.Name = "Monitor";
+            this.Opacity = 0.98D;
+            this.Padding = new System.Windows.Forms.Padding(1);
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "App Time Monitor";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Monitor_FormClosing);
             this.Resize += new System.EventHandler(this.Monitor_Resize);
