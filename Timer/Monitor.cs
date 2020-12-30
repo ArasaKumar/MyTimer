@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
+using MaterialSkin;
+using MaterialSkin.Controls;
 
 #region References
 
@@ -9,7 +11,7 @@ using System.Windows.Forms;
 
 namespace Timer
 {
-    public partial class Monitor : Form
+    public partial class Monitor : MaterialForm
     {
 
         #region Class Declarations
@@ -17,6 +19,7 @@ namespace Timer
         private FGHook _objfgHook = null;
         private DataStore _objDataStore = null;
         private string _strStatus = string.Empty;
+        private readonly MaterialSkinManager materialSkinManager;
 
         private class Status
         {
@@ -33,7 +36,7 @@ namespace Timer
             set
             {
                 _strStatus = value;
-                lblMessage.Text = _strStatus;
+                mlblMessage.Text = _strStatus;
                 SetAllowedActions(_strStatus);
             }
         }
@@ -47,6 +50,12 @@ namespace Timer
             try
             {
                 InitializeComponent();
+
+                materialSkinManager = MaterialSkinManager.Instance;
+                materialSkinManager.AddFormToManage(this);
+                materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
+                materialSkinManager.ColorScheme = new ColorScheme(Primary.BlueGrey800, Primary.BlueGrey900, Primary.BlueGrey500, Accent.LightBlue200, TextShade.WHITE);
+
                 notifyIcon.ContextMenuStrip = cmMenu;
                 _objDataStore = DataStore.GetInstance();
                 _objfgHook = new FGHook(_objDataStore);
@@ -57,6 +66,11 @@ namespace Timer
             {
                 HandleException(ex);
             }
+        }
+
+        private void bswtTheme_CheckedChanged(object sender, EventArgs e)
+        {
+            materialSkinManager.Theme = bswtTheme.Checked ? MaterialSkinManager.Themes.DARK : MaterialSkinManager.Themes.LIGHT;
         }
 
         #endregion
@@ -90,16 +104,16 @@ namespace Timer
 
         private void _objDataStore_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            tbxLog.Text = string.Join(Environment.NewLine, _objDataStore.Data);
+            mmtbxData.Lines = _objDataStore.Data;
         }
 
         private void SetAllowedActions(string pstrStatus)
         {
             bool bStatus = pstrStatus == Status.Running;
 
-            btnStart.Enabled = !bStatus;
+            mbtnStart.Enabled = !bStatus;
             startToolStripMenuItem.Enabled = !bStatus;
-            btnStop.Enabled = bStatus;
+            mbtnStop.Enabled = bStatus;
             stopToolStripMenuItem.Enabled = bStatus;
         }
 
@@ -199,7 +213,7 @@ namespace Timer
         }
 
         #endregion
-        
+
     }
 }
 

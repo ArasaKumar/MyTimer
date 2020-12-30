@@ -21,16 +21,16 @@ namespace Timer
 
         }
 
-        public string Data
+        public string[] Data
         {
             get
             {
-                string strData = string.Empty;
+                List<string> lstData = new List<string>();
                 foreach(KeyValuePair<string,TimeSpan> kv in _dicAppAndTime)
                 {
-                    strData += kv.Key + " : " + kv.Value + Environment.NewLine;
+                    lstData.Add( kv.Key + " : " + kv.Value);
                 }
-                return strData;
+                return lstData.ToArray();
             }
         }
 
