@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 using Timer;
+using Timer.Interfaces;
 
 class FGHook : IDisposable
 {
     // Delegate and imports from pinvoke.net:
 
-    private static DataStore _objDataStore = null;
+    private static IDataStore _objDataStore = null;
 
     delegate void WinEventDelegate(IntPtr hWinEventHook, uint eventType, IntPtr hwnd, int idObject, int idChild, uint dwEventThread, uint dwmsEventTime);
 
@@ -33,7 +34,7 @@ class FGHook : IDisposable
     // storing it in a class field is simplest way to do this.
     static WinEventDelegate procDelegate = new WinEventDelegate(WinEventProc);
 
-    public FGHook(DataStore pobjDataStore)
+    public FGHook(IDataStore pobjDataStore)
     {
         _objDataStore = pobjDataStore;
         hhook = SetWinEventHook(EVENT_SYSTEM_FOREGROUND, EVENT_SYSTEM_FOREGROUND, IntPtr.Zero, procDelegate, 0, 0, WINEVENT_OUTOFCONTEXT);
@@ -59,11 +60,11 @@ class FGHook : IDisposable
         {
             if (p.Id == pid)
             {
-                _objDataStore.UpdateData(p.ProcessName);
+                _objDataStore.StoreCurrentFocusedWindow(p.ProcessName);
                 return;
             }
         }
-        _objDataStore.UpdateData("Unknown");
+        _objDataStore.StoreCurrentFocusedWindow("Unknown");
     }
 
     public void Dispose()

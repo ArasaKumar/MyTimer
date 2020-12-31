@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using Timer.Interfaces;
 
 namespace Timer
 {
-    public class DataStore : INotifyPropertyChanged
+    public class DataStore : IDataStore
     {
         public event PropertyChangedEventHandler PropertyChanged;
         private static DataStore _objDataStore = new DataStore();
@@ -22,6 +23,13 @@ namespace Timer
 
         }
 
+        public void Reset()
+        {
+            _dicAppAndTime = new Dictionary<string, TimeSpan>();
+            _strCurrentApp = string.Empty;
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("AppList"));
+        }
+
         public string[] Data
         {
             get
@@ -35,7 +43,7 @@ namespace Timer
             }
         }
 
-        public void UpdateData(string pstrData)
+        public void StoreCurrentFocusedWindow(string pstrData)
         {
             UpdateTimings(pstrData);
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("AppList"));
@@ -44,13 +52,18 @@ namespace Timer
 
         private void UpdateTimings (string pstrAppName)
         {
-            if(_dicAppAndTime.ContainsKey(pstrAppName))
+            if(string.IsNullOrEmpty(_strCurrentApp))
+            {
+                _strCurrentApp = pstrAppName;
+            }
+
+            if(_dicAppAndTime.ContainsKey(_strCurrentApp))
             {
                 _dicAppAndTime[_strCurrentApp] = _dicAppAndTime[_strCurrentApp] + (DateTime.Now - _dtmeFocusObtainedTime);
             }
             else
             {
-                _dicAppAndTime.Add(pstrAppName, new TimeSpan());
+                _dicAppAndTime.Add(_strCurrentApp, new TimeSpan());
             }
             _strCurrentApp = pstrAppName;
         }

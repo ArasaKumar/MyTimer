@@ -1,7 +1,8 @@
-﻿using System;
-using System.Windows.Forms;
-using MaterialSkin;
+﻿using MaterialSkin;
 using MaterialSkin.Controls;
+using System;
+using System.Windows.Forms;
+using Timer.Interfaces;
 
 #region References
 
@@ -17,18 +18,16 @@ namespace Timer
         #region Class Declarations
 
         private FGHook _objfgHook = null;
-        private DataStore _objDataStore = null;
-        private string _strStatus = string.Empty;
+
         private readonly MaterialSkinManager _materialSkinManager;
         private readonly ColorScheme _csLight;
         private readonly ColorScheme _csDark;
 
-        private class Status
-        {
-            public const string Running = "Running!";
-            public const string Stopped = "Stopped!";
-        }
+        private IExceptionHandler _exceptionHandler;
+        private ISaveData _saveData;
+        private IDataStore _dataStore = null;
 
+        private string _strStatus = string.Empty;
         private string AppStatus
         {
             get
@@ -53,6 +52,11 @@ namespace Timer
             {
                 InitializeComponent();
 
+                Factory objFactory = new Factory();
+                _exceptionHandler = objFactory.GetExceptionHandler();
+                _saveData = objFactory.GetSaveData();
+                _dataStore = objFactory.GetDataStore();
+
                 _materialSkinManager = MaterialSkinManager.Instance;
                 _materialSkinManager.AddFormToManage(this);
                 _materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
@@ -60,14 +64,16 @@ namespace Timer
                 _csDark = new ColorScheme(Primary.BlueGrey800, Primary.BlueGrey900, Primary.BlueGrey500, Accent.LightBlue200, TextShade.WHITE);
 
                 notifyIcon.ContextMenuStrip = cmMenu;
-                _objDataStore = DataStore.GetInstance();
-                _objfgHook = new FGHook(_objDataStore);
-                _objDataStore.PropertyChanged += _objDataStore_PropertyChanged;
-                AppStatus = Status.Running;
+                _objfgHook = new FGHook(_dataStore);
+                _dataStore.PropertyChanged += _objDataStore_PropertyChanged;
+
+
+                AppStatus = Constants.Running;
             }
             catch (Exception ex)
             {
-                HandleException(ex);
+                DisposeHook();
+                _exceptionHandler.HandleException(ex);
             }
         }
 
@@ -93,18 +99,32 @@ namespace Timer
 
         private void Monitor_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (_objfgHook != null)
-            {
-                _objfgHook.Dispose();
-            }
+            DisposeHook();
         }
 
         private void Monitor_Resize(object sender, EventArgs e)
         {
-            if(this.WindowState==FormWindowState.Minimized)
+            if (this.WindowState == FormWindowState.Minimized)
             {
                 Hide();
                 notifyIcon.Visible = true;
+            }
+        }
+
+        private void mbtnClear_Click(object sender, EventArgs e)
+        {
+            _dataStore.Reset();
+        }
+
+        private void mbtnSave_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                _saveData.SaveData(DateTime.Now, _dataStore.Data, _exceptionHandler);
+            }
+            catch (Exception ex)
+            {
+                _exceptionHandler.HandleException(ex);
             }
         }
 
@@ -114,12 +134,12 @@ namespace Timer
 
         private void _objDataStore_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            mmtbxData.Lines = _objDataStore.Data;
+            mmtbxData.Lines = _dataStore.Data;
         }
 
         private void SetAllowedActions(string pstrStatus)
         {
-            bool bStatus = pstrStatus == Status.Running;
+            bool bStatus = pstrStatus == Constants.Running;
 
             mbtnStart.Enabled = !bStatus;
             startToolStripMenuItem.Enabled = !bStatus;
@@ -135,27 +155,25 @@ namespace Timer
         {
             try
             {
-                if (AppStatus != Status.Running)
+                if (AppStatus != Constants.Running)
                 {
-                    AppStatus = Status.Running;
-                    _objfgHook = new FGHook(_objDataStore);
+                    AppStatus = Constants.Running;
+                    _objfgHook = new FGHook(_dataStore);
                 }
             }
             catch (Exception ex)
             {
-                HandleException(ex);
+                DisposeHook();
+                _exceptionHandler.HandleException(ex);
             }
         }
 
         private void StopMonitoring()
         {
-            if (AppStatus != Status.Stopped)
+            if (AppStatus != Constants.Stopped)
             {
-                AppStatus = Status.Stopped;
-                if (_objfgHook != null)
-                {
-                    _objfgHook.Dispose();
-                }
+                AppStatus = Constants.Stopped;
+                DisposeHook();
             }
         }
 
@@ -163,25 +181,24 @@ namespace Timer
         {
             try
             {
-                if (_objfgHook != null)
-                {
-                    _objfgHook.Dispose();
-                }
+                DisposeHook();
                 this.Close();
             }
             catch (Exception ex)
             {
-                HandleException(ex);
+                DisposeHook();
+                _exceptionHandler.HandleException(ex);
             }
         }
 
-        private void HandleException(Exception ex)
+        private void DisposeHook()
         {
             if (_objfgHook != null)
             {
                 _objfgHook.Dispose();
+                _objfgHook = null;
             }
-            MessageBox.Show(ex.ToString(), this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            AppStatus = Constants.Stopped;
         }
 
         #endregion
@@ -198,7 +215,8 @@ namespace Timer
             }
             catch (Exception ex)
             {
-                HandleException(ex);
+                DisposeHook();
+                _exceptionHandler.HandleException(ex);
             }
         }
 
@@ -223,6 +241,7 @@ namespace Timer
         }
 
         #endregion
+
     }
 }
 

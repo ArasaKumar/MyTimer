@@ -47,6 +47,8 @@
             this.mlblMessage = new MaterialSkin.Controls.MaterialLabel();
             this.mlblStatusLabel = new MaterialSkin.Controls.MaterialLabel();
             this.mmtbxData = new MaterialSkin.Controls.MaterialMultiLineTextBox();
+            this.mbtnClear = new MaterialSkin.Controls.MaterialButton();
+            this.mbtnSave = new MaterialSkin.Controls.MaterialButton();
             this.cmMenu.SuspendLayout();
             this.mtlpMain.SuspendLayout();
             this.mtlpHeader.SuspendLayout();
@@ -55,6 +57,7 @@
             // 
             // notifyIcon
             // 
+            this.notifyIcon.BalloonTipText = "Personal Time Tracker";
             this.notifyIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon.Icon")));
             this.notifyIcon.Text = "notifyIcon";
             // 
@@ -125,7 +128,9 @@
             // 
             // mtlpHeader
             // 
-            this.mtlpHeader.ColumnCount = 5;
+            this.mtlpHeader.ColumnCount = 7;
+            this.mtlpHeader.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.mtlpHeader.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.mtlpHeader.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.mtlpHeader.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.mtlpHeader.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
@@ -134,7 +139,9 @@
             this.mtlpHeader.Controls.Add(this.mbtnStop, 2, 0);
             this.mtlpHeader.Controls.Add(this.mlblActionLabel, 0, 0);
             this.mtlpHeader.Controls.Add(this.mbtnStart, 1, 0);
-            this.mtlpHeader.Controls.Add(this.bswtTheme, 3, 0);
+            this.mtlpHeader.Controls.Add(this.bswtTheme, 5, 0);
+            this.mtlpHeader.Controls.Add(this.mbtnClear, 3, 0);
+            this.mtlpHeader.Controls.Add(this.mbtnSave, 4, 0);
             this.mtlpHeader.Dock = System.Windows.Forms.DockStyle.Fill;
             this.mtlpHeader.Location = new System.Drawing.Point(3, 3);
             this.mtlpHeader.Name = "mtlpHeader";
@@ -280,6 +287,44 @@
             this.mmtbxData.TabIndex = 3;
             this.mmtbxData.Text = "";
             // 
+            // mbtnClear
+            // 
+            this.mbtnClear.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.mbtnClear.Depth = 0;
+            this.mbtnClear.DrawShadows = true;
+            this.mbtnClear.HighEmphasis = true;
+            this.mbtnClear.Icon = null;
+            this.mbtnClear.Location = new System.Drawing.Point(253, 6);
+            this.mbtnClear.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.mbtnClear.MouseState = MaterialSkin.MouseState.HOVER;
+            this.mbtnClear.Name = "mbtnClear";
+            this.mbtnClear.Size = new System.Drawing.Size(108, 27);
+            this.mbtnClear.TabIndex = 6;
+            this.mbtnClear.Text = "Clear Data";
+            this.mbtnClear.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.mbtnClear.UseAccentColor = false;
+            this.mbtnClear.UseVisualStyleBackColor = true;
+            this.mbtnClear.Click += new System.EventHandler(this.mbtnClear_Click);
+            // 
+            // mbtnSave
+            // 
+            this.mbtnSave.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.mbtnSave.Depth = 0;
+            this.mbtnSave.DrawShadows = true;
+            this.mbtnSave.HighEmphasis = true;
+            this.mbtnSave.Icon = null;
+            this.mbtnSave.Location = new System.Drawing.Point(369, 6);
+            this.mbtnSave.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.mbtnSave.MouseState = MaterialSkin.MouseState.HOVER;
+            this.mbtnSave.Name = "mbtnSave";
+            this.mbtnSave.Size = new System.Drawing.Size(113, 27);
+            this.mbtnSave.TabIndex = 7;
+            this.mbtnSave.Text = "Save to File";
+            this.mbtnSave.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.mbtnSave.UseAccentColor = false;
+            this.mbtnSave.UseVisualStyleBackColor = true;
+            this.mbtnSave.Click += new System.EventHandler(this.mbtnSave_Click);
+            // 
             // Monitor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -325,6 +370,8 @@
         private MaterialSkin.Controls.MaterialLabel mlblMessage;
         private MaterialSkin.Controls.MaterialMultiLineTextBox mmtbxData;
         private MaterialSkin.Controls.MaterialSwitch bswtTheme;
+        private MaterialSkin.Controls.MaterialButton mbtnClear;
+        private MaterialSkin.Controls.MaterialButton mbtnSave;
     }
 }
 
