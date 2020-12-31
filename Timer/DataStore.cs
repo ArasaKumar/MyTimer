@@ -10,6 +10,7 @@ namespace Timer
         private static DataStore _objDataStore = new DataStore();
         private Dictionary<string, TimeSpan> _dicAppAndTime = new Dictionary<string, TimeSpan>();
         private DateTime _dtmeFocusObtainedTime = DateTime.Now;
+        private string _strCurrentApp = string.Empty;
 
         public static DataStore GetInstance()
         {
@@ -45,12 +46,13 @@ namespace Timer
         {
             if(_dicAppAndTime.ContainsKey(pstrAppName))
             {
-                _dicAppAndTime[pstrAppName] = _dicAppAndTime[pstrAppName] + (DateTime.Now - _dtmeFocusObtainedTime);
+                _dicAppAndTime[_strCurrentApp] = _dicAppAndTime[_strCurrentApp] + (DateTime.Now - _dtmeFocusObtainedTime);
             }
             else
             {
-                _dicAppAndTime.Add(pstrAppName, (DateTime.Now - _dtmeFocusObtainedTime));
+                _dicAppAndTime.Add(pstrAppName, new TimeSpan());
             }
+            _strCurrentApp = pstrAppName;
         }
     }
 }
