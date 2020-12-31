@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Runtime.InteropServices;
-using Timer;
 using Timer.Interfaces;
 
 class FGHook : IDisposable
