@@ -30,6 +30,11 @@ namespace Timer
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("AppList"));
         }
 
+        public void InitializeStartTime()
+        {
+            _dtmeFocusObtainedTime = DateTime.Now;
+        }
+
         public string[] Data
         {
             get
@@ -63,7 +68,7 @@ namespace Timer
             }
             else
             {
-                _dicAppAndTime.Add(_strCurrentApp, new TimeSpan());
+                _dicAppAndTime.Add(_strCurrentApp, (DateTime.Now - _dtmeFocusObtainedTime));
             }
             _strCurrentApp = pstrAppName;
         }

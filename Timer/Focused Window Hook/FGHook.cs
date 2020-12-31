@@ -36,6 +36,7 @@ class FGHook : IDisposable
     public FGHook(IDataStore pobjDataStore)
     {
         _objDataStore = pobjDataStore;
+        _objDataStore.InitializeStartTime();
         hhook = SetWinEventHook(EVENT_SYSTEM_FOREGROUND, EVENT_SYSTEM_FOREGROUND, IntPtr.Zero, procDelegate, 0, 0, WINEVENT_OUTOFCONTEXT);
     }
 

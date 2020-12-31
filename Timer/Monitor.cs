@@ -2,6 +2,7 @@
 using MaterialSkin.Controls;
 using System;
 using System.Windows.Forms;
+using System.Timers;
 using Timer.Interfaces;
 
 #region References
@@ -27,7 +28,11 @@ namespace Timer
         private ISaveData _saveData;
         private IDataStore _dataStore = null;
 
+        private DateTime _trackingStartedOn = DateTime.Now;
+        private TimeSpan _totalTimeTracked = new TimeSpan();
+        private System.Timers.Timer _3SecTimer = new System.Timers.Timer();
         private string _strStatus = string.Empty;
+
         private string AppStatus
         {
             get
@@ -66,7 +71,9 @@ namespace Timer
                 notifyIcon.ContextMenuStrip = cmMenu;
                 _objfgHook = new FGHook(_dataStore);
                 _dataStore.PropertyChanged += _objDataStore_PropertyChanged;
-
+                _3SecTimer.Interval = 3000;
+                _3SecTimer.AutoReset = false;
+                _3SecTimer.Elapsed += ClearMessageTimer_Elapsed;
 
                 AppStatus = Constants.Running;
             }
@@ -86,6 +93,12 @@ namespace Timer
         #endregion
 
         #region UI Screen Event Handlers
+
+        private void ClearMessageTimer_Elapsed(object sender, ElapsedEventArgs e)
+        {
+            _3SecTimer.Stop();
+            mlblMsg.Invoke(new Action(() => mlblMsg.Text = string.Empty));
+        }
 
         private void btnStart_Click(object sender, EventArgs e)
         {
@@ -114,13 +127,15 @@ namespace Timer
         private void mbtnClear_Click(object sender, EventArgs e)
         {
             _dataStore.Reset();
+            mlblTotalTime.Text = string.Empty;
         }
 
         private void mbtnSave_Click(object sender, EventArgs e)
         {
             try
             {
-                _saveData.SaveData(DateTime.Now, _dataStore.Data, _exceptionHandler);
+                bool bStatus = _saveData.SaveData(DateTime.Now, _dataStore.Data, _exceptionHandler, out string strmessage);
+                ShowAndHideMessage(strmessage);
             }
             catch (Exception ex)
             {
@@ -135,6 +150,8 @@ namespace Timer
         private void _objDataStore_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             mmtbxData.Lines = _dataStore.Data;
+            TimeSpan totalTimeTracked = (DateTime.Now - _trackingStartedOn) + _totalTimeTracked;
+            mlblTotalTime.Text = "Total time tracked: " + totalTimeTracked;
         }
 
         private void SetAllowedActions(string pstrStatus)
@@ -155,6 +172,7 @@ namespace Timer
         {
             try
             {
+                _trackingStartedOn = DateTime.Now;
                 if (AppStatus != Constants.Running)
                 {
                     AppStatus = Constants.Running;
@@ -170,6 +188,7 @@ namespace Timer
 
         private void StopMonitoring()
         {
+            _totalTimeTracked = DateTime.Now - _trackingStartedOn;
             if (AppStatus != Constants.Stopped)
             {
                 AppStatus = Constants.Stopped;
@@ -199,6 +218,12 @@ namespace Timer
                 _objfgHook = null;
             }
             AppStatus = Constants.Stopped;
+        }
+
+        private void ShowAndHideMessage(string pstrMessage)
+        {
+            mlblMsg.Text = pstrMessage;
+            _3SecTimer.Start();
         }
 
         #endregion

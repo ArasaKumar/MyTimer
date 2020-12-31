@@ -9,5 +9,7 @@ namespace Timer.Interfaces
         string[] Data { get; }
 
         void Reset();
+
+        void InitializeStartTime();
     }
 }
